@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cena de Navidad | Invitación Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+
+    <main class="invitation-wrapper">
+        <section class="card" id="invitationCard">
+            <div class="card-header">
+                <span class="host-tag">Organizada por Ángel</span>
+                <h1>Cena de Navidad</h1>
+                <div class="divider"><span>🎄</span></div>
+            </div>
+
+            <div class="card-body">
+                <p class="welcome-text">Te invitamos a celebrar la magia de la temporada en una noche inolvidable llena de alegría, gran compañía y espíritu navideño.</p>
+                
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="detail-icon">📅</span>
+                        <div>
+                            <span class="detail-label">Fecha</span>
+                            <span class="detail-value">24 de Diciembre</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-icon">⏰</span>
+                        <div>
+                            <span class="detail-label">Hora</span>
+                            <span class="detail-value">7:30 PM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item full-width">
+                        <span class="detail-icon">📍</span>
+                        <div>
+                            <span class="detail-label">Lugar</span>
+                            <span class="detail-value">Rancho El Realito, Jalisco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn-rsvp" id="rsvpBtn">Confirmar Asistencia</button>
+            </div>
+        </section>
+
+        <!-- Modal de Confirmación -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-content">
+                <h2>¡Qué alegría!</h2>
+                <p>Tu confirmación es muy importante para nosotros. Prepárate para una gran noche.</p>
+                <button class="btn-close" id="closeModal">Cerrar</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Generador de Nieve Dinámica
+        const snowContainer = document.getElementById('snowContainer');
+        const snowflakeCount = 45;
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            snowflake.style.animationDelay = `${Math.random() * 5}s`;
+            snowflake.style.opacity = Math.random();
+            snowflake.style.transform = `scale(${Math.random() * 0.8 + 0.2})`;
+            snowContainer.appendChild(snowflake);
+        }
+
+        // Lógica de Animaciones de Entrada y Salida con Interacción
+        const rsvpBtn = document.getElementById('rsvpBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const card = document.getElementById('invitationCard');
+
+        rsvpBtn.addEventListener('click', () => {
+            card.classList.add('fade-out-up');
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+            }, 600);
+        });
+
+        closeModal.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            card.classList.remove('fade-out-up');
+            card.classList.add('fade-in-down');
+            setTimeout(() => {
+                card.classList.remove('fade-in-down');
+            }, 800);
+        });
+    </script>
+</body>
+</html>
